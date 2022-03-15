@@ -49,21 +49,12 @@ app.use(express.static("views"));
 app.use(mongoSanitize()); // Checks the request headers, query strings, params for malicious codes
 
 // Import all routes
-// const { authRouter } = require("./routes/auth/index");
-// const { paymentLinkRouter } = require("./routes/paymentLink/index");
-// const adminRouter = require("./routes/admin/index");
-// const cryptoRoute = require("./routes/crypto/index");
-// const { userRouter } = require("./routes/user/index");
+const {feeConfigSpecRouter} = require('./routes/fcs.route');
 
 //default Route
 app.get("/", (req, res) => {
   res.json({ message: `Welcome to Payercoins API v1` });
 });
-
-// app.post('/', (req, res) => {
-
-// })
-
 // Home Route
 app.get("/api/v1/home", (req, res) => {
   return successResMsg(res, 200, { message: "Welcome to LANNISTER-PAY API" });
@@ -74,10 +65,7 @@ app.post("/api/v1/withdrawal", (req, res) => {
 });
 
 //   Routes Middleware
-// app.use("/api/v1/auth", authRouter);
-// app.use("/api/v1/paymentLink", paymentLinkRouter);
-// app.use("/api/v1/crypto", cryptoRoute);
-// app.use("/api/v1/user", userRouter);
+app.use('/api/v1/fsc', feeConfigSpecRouter);
 
 // admin route middleware
 // adminRouter(app);
